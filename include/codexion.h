@@ -6,7 +6,7 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 00:27:12 by twaky             #+#    #+#             */
-/*   Updated: 2026/04/24 02:28:35 by twaky            ###   ########.fr       */
+/*   Updated: 2026/04/25 00:00:20 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,9 @@ int ft_parser2(int argc, char *argv[], t_config *config);
 int is_valid_number(char *str);
 int check_argv_8(char *str, t_config *t_config);
 int check_range(t_config *config);
+
+/* init.c */
+
+int init_dongles(t_simulation *sim);
 
 #endif
