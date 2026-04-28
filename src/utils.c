@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/24 02:31:29 by twaky             #+#    #+#             */
-/*   Updated: 2026/04/29 01:16:34 by twaky            ###   ########.fr       */
+/*   Created: 2026/04/29 00:16:58 by twaky             #+#    #+#             */
+/*   Updated: 2026/04/29 00:47:29 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/codexion.h"
 
-int main(int argc, char *argv[])
+long long get_time_ms(void)
 {
-    t_simulation sim;
+    struct timeval tv;
 
-    if (!ft_parser(argc, argv, &sim.config))
-        return (1);
-    if (!init_simulation(&sim))
-    {
-        cleanup_simulation(&sim);
-        return (1);
-    }
-    if (!start_simulation(&sim))
-    {
-        cleanup_simulation(&sim);
-        return (1);
-    }
-    cleanup_simulation(&sim);
-    return (0);
+    gettimeofday(&tv, NULL);
+    return ((long long)tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }

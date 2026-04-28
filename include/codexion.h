@@ -6,7 +6,7 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 00:27:12 by twaky             #+#    #+#             */
-/*   Updated: 2026/04/28 23:49:56 by twaky            ###   ########.fr       */
+/*   Updated: 2026/04/29 01:17:47 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_simulation
     long long        start_time;     
 }   t_simulation;
 
-/* ft_parser.c */
+/* parsing.c */
 
 int ft_parser(int argc, char *argv[], t_config *config);
 int ft_parser2(int argc, char *argv[], t_config *config);
@@ -108,5 +108,21 @@ int init_simulation(t_simulation *sim);
 void destroy_dongles(t_simulation *sim, int count);
 void destroy_coders(t_simulation *sim, int count);
 void cleanup_simulation(t_simulation *sim);
+
+/* utils.c */
+
+long long get_time_ms(void);
+
+/* logs.c */
+
+void    log_state(t_simulation *sim, int coder_id, int state);
+
+/* coder.c */
+
+void *coder_routine(void *arg);
+
+/* simulation.c */
+
+int start_simulation(t_simulation *sim);
 
 #endif

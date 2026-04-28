@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/24 02:31:29 by twaky             #+#    #+#             */
-/*   Updated: 2026/04/29 01:16:34 by twaky            ###   ########.fr       */
+/*   Created: 2026/04/29 01:08:15 by twaky             #+#    #+#             */
+/*   Updated: 2026/04/29 01:14:57 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/codexion.h"
 
-int main(int argc, char *argv[])
+int start_simulation(t_simulation *sim)
 {
-    t_simulation sim;
+    int n;
+    int i;
 
-    if (!ft_parser(argc, argv, &sim.config))
-        return (1);
-    if (!init_simulation(&sim))
+    i = 0;
+    n = sim->config.number_of_coders;
+    sim->start_time = get_time_ms();
+    while (i < n)
     {
-        cleanup_simulation(&sim);
-        return (1);
+        if (pthread_create(&sim->coders[i].thread, NULL, coder_routine, &sim->coders[i]) != 0)
+            return (0);
+        i++;
     }
-    if (!start_simulation(&sim))
+    i = 0;
+    while (i < n)
     {
-        cleanup_simulation(&sim);
-        return (1);
+        pthread_join(sim->coders[i].thread, NULL);
+        i++;
     }
-    cleanup_simulation(&sim);
-    return (0);
+    return (1);
 }
