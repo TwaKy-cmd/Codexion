@@ -6,11 +6,11 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 01:44:26 by twaky             #+#    #+#             */
-/*   Updated: 2026/04/24 02:17:42 by twaky            ###   ########.fr       */
+/*   Updated: 2026/04/28 23:46:31 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "codexion.h"
+#include "../include/codexion.h"
 
 int ft_parser(int argc, char *argv[], t_config *config)
 {

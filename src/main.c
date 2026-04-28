@@ -6,22 +6,24 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 02:31:29 by twaky             #+#    #+#             */
-/*   Updated: 2026/04/24 02:44:06 by twaky            ###   ########.fr       */
+/*   Updated: 2026/04/28 23:46:37 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "codexion.h"
+#include "../include/codexion.h"
 
 int main(int argc, char *argv[])
 {
-    t_config config;
+    t_simulation sim;
 
-    if (!ft_parser(argc, argv, &config))
+    if (!ft_parser(argc, argv, &sim.config))
         return (1);
-    printf("%d, %lld, %lld, %lld, %lld, %d, %lld, %d\n",
-        config.number_of_coders, config.time_to_burnout,
-        config.time_to_compile, config.time_to_debug,
-        config.time_to_refactor, config.compiles_required,
-        config.dongle_cooldown, config.scheduler);
+    if (!init_simulation(&sim))
+    {
+        cleanup_simulation(&sim);
+        return (1);
+    }
+    /* ici plus tard : start_simulation, monitor, etc. */
+    cleanup_simulation(&sim);
     return (0);
 }

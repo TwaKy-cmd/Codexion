@@ -6,7 +6,7 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 00:27:12 by twaky             #+#    #+#             */
-/*   Updated: 2026/04/25 00:00:20 by twaky            ###   ########.fr       */
+/*   Updated: 2026/04/28 23:49:56 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,13 @@ int check_range(t_config *config);
 /* init.c */
 
 int init_dongles(t_simulation *sim);
+int init_coders(t_simulation *sim);
+int init_simulation(t_simulation *sim);
+
+/* cleanup.c */
+
+void destroy_dongles(t_simulation *sim, int count);
+void destroy_coders(t_simulation *sim, int count);
+void cleanup_simulation(t_simulation *sim);
 
 #endif
