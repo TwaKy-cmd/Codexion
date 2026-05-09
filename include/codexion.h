@@ -6,7 +6,7 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 00:27:12 by twaky             #+#    #+#             */
-/*   Updated: 2026/04/29 01:17:47 by twaky            ###   ########.fr       */
+/*   Updated: 2026/05/09 19:59:22 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ void cleanup_simulation(t_simulation *sim);
 
 /* utils.c */
 
-long long get_time_ms(void);
+long long   get_time_ms(void);
+int         check_sim_ended(t_simulation *sim);
+void        set_sim_ended(t_simulation *sim);
 
 /* logs.c */
 
@@ -124,5 +126,16 @@ void *coder_routine(void *arg);
 /* simulation.c */
 
 int start_simulation(t_simulation *sim);
+
+/* dongle.c */
+
+void    take_dongles(t_coder *coder);
+void    release_dongles(t_coder *coder);
+
+/* monitor.c */
+
+void    *monitor_routine(void *arg);
+int     check_burnout(t_simulation *sim, long long now);
+int     check_all_done(t_simulation *sim);
 
 #endif
