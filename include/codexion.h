@@ -6,7 +6,7 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 00:27:12 by twaky             #+#    #+#             */
-/*   Updated: 2026/05/09 19:59:22 by twaky            ###   ########.fr       */
+/*   Updated: 2026/05/09 21:53:35 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void cleanup_simulation(t_simulation *sim);
 long long   get_time_ms(void);
 int         check_sim_ended(t_simulation *sim);
 void        set_sim_ended(t_simulation *sim);
+struct timespec    compute_abstime(long long delay_ms);
 
 /* logs.c */
 
@@ -129,6 +130,7 @@ int start_simulation(t_simulation *sim);
 
 /* dongle.c */
 
+static void take_one_dongle(t_dongle *dongle, t_simulation *sim);
 void    take_dongles(t_coder *coder);
 void    release_dongles(t_coder *coder);
 
