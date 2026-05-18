@@ -6,7 +6,7 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:27:42 by twaky             #+#    #+#             */
-/*   Updated: 2026/05/18 22:59:12 by twaky            ###   ########.fr       */
+/*   Updated: 2026/05/18 23:15:45 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,12 @@ void	take_dongles(t_coder *coder)
 
 void	release_dongles(t_coder *coder)
 {
+	pthread_mutex_lock(&coder->left_dongle->mutex);
 	coder->left_dongle->is_taken = 0;
 	coder->left_dongle->release_time = get_time_ms();
 	pthread_cond_broadcast(&coder->left_dongle->cond);
 	pthread_mutex_unlock(&coder->left_dongle->mutex);
+	pthread_mutex_lock(&coder->right_dongle->mutex);
 	coder->right_dongle->is_taken = 0;
 	coder->right_dongle->release_time = get_time_ms();
 	pthread_cond_broadcast(&coder->right_dongle->cond);
