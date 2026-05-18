@@ -6,7 +6,7 @@
 /*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 18:52:54 by twaky             #+#    #+#             */
-/*   Updated: 2026/05/18 22:44:20 by twaky            ###   ########.fr       */
+/*   Updated: 2026/05/18 23:15:30 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ void	wake_all_dongles(t_simulation *sim)
 	i = 0;
 	while (i < sim->config.number_of_coders)
 	{
+		pthread_mutex_lock(&sim->dongles[i].mutex);
 		pthread_cond_broadcast(&sim->dongles[i].cond);
+		pthread_mutex_unlock(&sim->dongles[i].mutex);
 		i++;
 	}
 }
