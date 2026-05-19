@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   coder.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 01:01:27 by twaky             #+#    #+#             */
-/*   Updated: 2026/05/18 23:10:23 by twaky            ###   ########.fr       */
+/*   Updated: 2026/05/20 01:24:46 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	*coder_routine(void *arg)
 		take_dongles(coder);
 		while (!check_sim_ended(coder->sim))
 			usleep(1000);
+		pthread_mutex_unlock(&coder->right_dongle->mutex);
 		return (NULL);
 	}
 	while (!check_sim_ended(coder->sim))

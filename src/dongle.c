@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dongle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:27:42 by twaky             #+#    #+#             */
-/*   Updated: 2026/05/18 23:15:45 by twaky            ###   ########.fr       */
+/*   Updated: 2026/05/20 01:23:58 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ void	take_one_dongle_utils(t_coder *coder, t_dongle *dongle)
 
 	while (1)
 	{
-		if (check_sim_ended(coder->sim))
-		{
-			pthread_mutex_unlock(&dongle->mutex);
-			return ;
-		}
 		elapsed = get_time_ms() - dongle->release_time;
 		if (try_take(dongle, coder, elapsed))
 			break ;
@@ -93,12 +88,10 @@ void	take_dongles(t_coder *coder)
 
 void	release_dongles(t_coder *coder)
 {
-	pthread_mutex_lock(&coder->left_dongle->mutex);
 	coder->left_dongle->is_taken = 0;
 	coder->left_dongle->release_time = get_time_ms();
 	pthread_cond_broadcast(&coder->left_dongle->cond);
 	pthread_mutex_unlock(&coder->left_dongle->mutex);
-	pthread_mutex_lock(&coder->right_dongle->mutex);
 	coder->right_dongle->is_taken = 0;
 	coder->right_dongle->release_time = get_time_ms();
 	pthread_cond_broadcast(&coder->right_dongle->cond);
